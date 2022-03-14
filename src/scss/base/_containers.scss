@@ -1,0 +1,8 @@
+.max-container{
+  @include container-padding;
+}
+.big-container{
+  @include section-padding;
+  max-width: $xlarge;
+  margin: 0 auto;
+}

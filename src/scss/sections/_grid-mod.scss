@@ -1,0 +1,33 @@
+.grid{
+  .grid__container--masonry{
+    @extend .grid__container;
+    grid-template-areas:
+    "biggerImage . . ."
+    "biggerImage . image ."
+    "biggerImage . image ."
+    "biggerImage . . .";
+    grid-row-gap: 0;
+    grid-column-gap: 0;
+    grid-template-columns: [line1] 1fr [line2] 7vw [line3] 1fr [line4] 7vw [line5];
+    grid-template-rows: [line1] .7fr [line2] 1.3fr [line3] 1.3fr [line4] 0.7fr [line5];
+    .grid__item--bigger-img{
+      grid-area: biggerImage;
+    }
+    @media screen and (max-width: $medium_large){
+      grid-template-areas:
+      "biggerImage biggerImage biggerImage biggerImage"
+      "biggerImage biggerImage biggerImage biggerImage"
+      ". image image ."
+      ". image image .";
+    }
+    @media screen and (max-width: $small_medium){
+      &__container{
+        grid-template-areas:
+        "image image image image"
+        "image image image image"
+        "header header header header"
+        "parag parag parag parag";
+      }
+    }
+  }
+}

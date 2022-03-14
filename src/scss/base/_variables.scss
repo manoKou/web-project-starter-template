@@ -1,0 +1,52 @@
+// Palette
+$white: #fff;
+$white-dark: #f4f0f0;
+$ice-white: #e8e2df;
+$grey: #49494c;
+$black: #312d2d;
+
+$blue: #13365c;
+$gold: #a98e4a;
+
+$black:#1c1c1c;
+$light_grey:#edece9;
+
+// Colors
+$main-theme-color: $blue;
+$alt-theme-color: $gold;
+
+$text-dark: $black;
+$text-light: $white;
+
+$base-background-color: $white-dark;
+$base-text-color: $text-dark;
+$menu-background-color: $ice-white;
+$menu-alt-background-color: $white-dark;
+
+$footer-background-color: $main-theme-color;
+$footer-text-color: $text-light;
+
+// Typography
+$base-font-family: "Averta", Helvetica, Arial, sans-serif;
+$alt-font-family: "Trivia Serif", "Times New Roman", Times, serif;
+
+$base-font-size: 15px;
+$em-base: $base-font-size;
+
+// Various sizes
+$container-max-width: 1400px;
+$desktop-header-height: 85px;
+$footer-collapse-width: 768px;
+
+// media screen sizes
+$small: 480px;
+$small_medium: 600px;
+$medium: 770px;
+$medium_large: 1024px;
+$large: 1200px;
+$xlarge: 1600px;
+
+// Transition timing functions
+$ease-in-sine: cubic-bezier(0.47, 0, 0.745, 0.715);
+$ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+$ease-in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95);

@@ -1,0 +1,62 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: $base-background-color;
+  color: $base-text-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: 1;
+  letter-spacing: .05em;
+}
+body.noscroll,
+body.menu-open,
+body.product-search-active {
+  overflow: hidden;
+}
+h1,h2{
+  font-size: em(25);
+}
+p{
+  padding: 5px;
+  margin-bottom: 15px;
+  font-size: $base-font-size;
+}
+ul{
+  @include reset-list;
+}
+input, form, textarea{
+  max-width: 100%;
+}
+.cover-figure{
+  width: 100%;
+  height: 100%;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.cover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.blue-border {
+  @include bordered($black, 1px);
+}
+.screen-reader {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+  white-space: nowrap;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}

@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+//========================================= FUCNCTIONS ==============================================
+// Strips the unit from a number.
+@function strip-units($value) {
+    @return ($value / ($value * 0 + 1));
+}
+
+// Convert pixels to ems
+// eg. for a relational value of 12px write em(12) when the parent is 16px
+// if the parent is another value say 24px write em(12, 24)
+@function em($pxval, $base: $em-base) {
+    @if not unitless($pxval) {
+        $pxval: strip-units($pxval);
+    }
+    @if not unitless($base) {
+        $base: strip-units($base);
+    }
+    @return ($pxval / $base) * 1em;
+}
+
+//========================================= BASE ==============================================
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@mixin horizontal-list {
+  @include reset-list;
+  li {
+    display: inline-block;
+    margin: {
+      left: -2px;
+      right: 2em;
+    }
+  }
+}
+
+@mixin bordered($color: blue, $width: 1px) {
+  border: $width solid $color;
+}
+
+@mixin gradient($start: #EEE, $stop: #FFF) {
+  background: -webkit-linear-gradient(to bottom,$start,$stop);
+  background: -ms-linear-gradient(to bottom,$start,$stop);
+  background: -moz-linear-gradient(to bottom,$start,$stop);
+  background: -o-linear-gradient(to bottom,$start,$stop);
+  background: linear-gradient(to bottom,$start,$stop);
+}
+
+@mixin container-padding {
+  padding-left: 1.25em;  // falback
+  padding-left: 1.25vw;
+  padding-right: 1.25em;  // falback
+  padding-right: 1.25vw;
+  @media all and (min-width: $large) { // mobile first
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+  }
+}
+
+@mixin section-padding {
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  @media all and (min-width: $large) { // mobile first
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;
+  }
+}
+
+//========================================= TRANSFORMATIONS ====================================
+@mixin perspective($distance:700px) {
+  -webkit-perspective: $distance;
+  -moz-perspective: $distance;
+  -ms-perspective: $distance;
+  perspective: $distance;
+}
+
+@mixin transform($string) {
+  -webkit-transform: $string;
+  -moz-transform: $string;
+  -o-transform: $string;
+  -ms-transform: $string;
+  transform: $string;
+}
+
+@mixin rotationX($deg:5deg) {
+  @include transform(rotateX($deg));
+}
+@mixin rotationY($deg:5deg) {
+  @include transform(rotateY($deg));
+}
+@mixin rotation($deg:5deg){
+  @include transform(rotate($deg));
+}
+@mixin scale($factor:1.5){
+  @include transform(scale($factor));
+}
+@mixin scaleX($factor:1.5){
+  @include transform(scaleX($factor));
+}
+
+//==================================== TRANSITIONS - ANIMATIONS  ===============================
+@mixin transition($property, $duration: 0.2s, $function: $ease-in-sine) {
+  -webkit-transition: $property $duration $function;
+  -moz-transition: $property $duration $function;
+  -o-transition: $property $duration $function;
+  -ms-transition: $property $duration $function;
+  transition: $property $duration $function;
+}
+
+@mixin animation($name, $duration: 0.3s, $function: $ease-in-sine, $delay: 0, $count: 1, $direction: normal) {
+  -webkit-animation-name: $name;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-timing-function: $function;
+  -webkit-animation-delay: $delay;
+  -webkit-animation-iteration-count: $count;
+  -webkit-animation-direction: $direction;
+
+  -ms-animation-name: $name;
+  -ms-animation-duration: $duration;
+  -ms-animation-timing-function: $function;
+  -ms-animation-delay: $delay;
+  -ms-animation-iteration-count: $count;
+  -ms-animation-direction: $direction;
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $function;
+  animation-delay: $delay;
+  animation-iteration-count: $count;
+  animation-direction: $direction;
+
+  -moz-animation-name: $name;
+  -moz-animation-duration: $duration;
+  -moz-animation-timing-function: $function;
+  -moz-animation-delay: $delay;
+  -moz-animation-iteration-count: $count;
+  -moz-animation-direction: $direction;
+}
+
+@mixin hover-underline-animation {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        opacity: 1;
+        background-color: currentColor;
+        // transform: scaleX(0);
+        @include scaleX(0);
+        // transition: transform 350ms;
+        @include transition(transform, 350ms, $ease-in-out-sine);
+    }
+    &:hover::after {
+        transform: scaleX(1);
+    }
+}

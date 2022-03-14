@@ -1,0 +1,104 @@
+.grid{
+  &__container{
+    display: grid;
+    align-content: stretch;
+    justify-content: stretch; // if items do not fill the container ( must be non-block, spec with pxs )
+    justify-items: stretch;
+    align-items: stretch;// stretch, start, end, center, baseline
+    grid-template-columns: [line1] calc(6vw - 20px) [line2] minmax(auto, 1.5fr) [line3] 2.25fr [line4] 15vw [line5];
+    grid-template-rows: [line1] 1fr [line2] 0.5fr [line3] 0.5fr [line4] minmax(max-content, min-content) [line5];
+    grid-template-areas:
+      ". . image image"
+      ". header image image"
+      ". header image image"
+      ". . parag .";
+    column-gap: 40px;
+    row-gap: 10px;
+    // Implicit tracks get created when there are more grid items than cells in the grid or when a grid item is placed outside of the explicit grid
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-flow: column;
+    &--columns{
+      @extend .grid__container;
+      grid-template-rows: [line1] 1fr [line2] auto [line3] minmax(max-content, auto) [line4];
+    }
+    &--rows{
+      grid-template-rows: [line1] 1fr [line2] auto [line3] minmax(auto, 1fr) [line4];
+    }
+    &--images{
+      @extend .grid__container;
+      grid-template-columns: [line1] calc(6vw - 20px) [line2] minmax(auto, 1.5fr) [line3] 2.2fr [line4] 0.05fr [line5] 15vw [line6];
+      grid-template-rows: [line1] 1fr [line2] 1.5fr [line3] minmax(max-content, min-content) [line4];
+      row-gap: 100px;
+      column-gap: 30px;
+      grid-template-areas:
+        ". . image image ."
+        ". header image image ."
+        ". header parag . .";
+        .grid__item--image{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .grid__item--header{
+          align-self: flex-start;
+        }
+    }
+  }
+  &__item{
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 1;
+    grid-row-end: span 3; // from line 1, span 2 next lines
+    justify-self: stretch;
+    align-self: center;
+  }
+  &__item--header{
+    grid-area: header;
+    align-self: center;
+    justify-self: flex-start;
+  }
+  &__item--image{
+    grid-area: image;
+    .cover-img{
+      padding-bottom: 80px; // fallback
+      padding-bottom: 5vw;
+    }
+  }
+  &__item--parag{
+    grid-area: parag;
+    align-self: center;
+  }
+  @media screen and (max-width: $medium_large){
+    &__container{
+      grid-template-columns: [line1] calc(4vw - 40px) [line2] min(1fr) [line3] 2fr [line4] 0vw [line5];
+      grid-template-areas:
+      "image image image image"
+      "image image image image"
+      "image image image image"
+      ". header parag .";
+    }
+  }
+  @media screen and (max-width: $small_medium){
+    &__container{
+      grid-template-rows: [line1] 1fr [line2] minmax(35vh,  3.5fr) [line3] auto [line4] minmax(max-content, min-content) [line5];
+      row-gap: 40px;
+      grid-template-areas:
+      "image image image image"
+      "image image image image"
+      "header header header header"
+      "parag parag parag parag";
+    }
+    &__item--header{
+      padding: 0 20px;
+    }
+    &__item--parag{
+      padding: 0 20px;
+    }
+    &__item--image{
+      .cover-img{
+        padding-bottom: 0vw;
+      }
+    }
+  }
+}
